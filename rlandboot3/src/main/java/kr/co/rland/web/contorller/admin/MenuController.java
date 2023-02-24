@@ -1,10 +1,21 @@
 package kr.co.rland.web.contorller.admin;
 
+import java.io.UnsupportedEncodingException;
+
+import java.net.URLDecoder;
+
+
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
+
+
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 
 
 @Controller("adminMenuController")
@@ -12,7 +23,24 @@ import org.springframework.web.bind.annotation.RestController;
 public class MenuController {
 	
 	@RequestMapping("list")
-	public String list() {
+	public String list(
+			@RequestParam(name= "p" ,defaultValue = "1") int page ,
+			@RequestParam(name ="q" , required = false ) String qurey
+				, HttpServletRequest req
+				, @CookieValue("my") String myCookie
+			) throws UnsupportedEncodingException {
+//		String 	mycookie = "";
+//		Cookie[] cookies = req.getCookies();
+//			for(Cookie cookie: cookies) {
+//				if(cookie.getName().equals("my"))
+//				mycookie = cookie.getValue();
+//				break;
+//			}
+		myCookie = URLDecoder.decode(myCookie, "utf-8");
+		System.out.println(myCookie);
+
+		System.out.println(page);
+		System.out.println(qurey);
 		return "/WEB-INF/view/admin/menu/list.jsp";
 	}
 	@RequestMapping("detail")

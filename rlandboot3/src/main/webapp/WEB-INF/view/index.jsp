@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>제스퍼가 잘 동작하는지 연습</h1>
+	<h1>${data}</h1>
 </body>
 </html>
