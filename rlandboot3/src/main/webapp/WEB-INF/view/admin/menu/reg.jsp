@@ -28,7 +28,11 @@
 				<legend>사진 입력 필드</legend>
 				<div>
 		
-					<input type="file" name="img">
+					<input type="file" name="imgs">
+				</div>
+				<div>
+		
+					<input type="file" name="imgs">
 				</div>
 				
 				<div>

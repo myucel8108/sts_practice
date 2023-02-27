@@ -1,5 +1,10 @@
 package kr.co.rland.web.contorller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
@@ -22,12 +27,37 @@ public class HomeController { //pojo는 마음대로 이름을 설정해도된�
 	
 	@PostMapping("upload")
 	@ResponseBody  //뷰를 하는것이 아닌 데이터만 보내는 것
-	public String upload(MultipartFile img) { //지금 이런상황이면 문자열만 보내진다. 기본타입이 보내질 때는 URl이 가능한 형태만 가능합 그래서 타입을 바꿔줘야함
+	public String upload(MultipartFile[] imgs, HttpServletRequest request) throws IOException { //지금 이런상황이면 문자열만 보내진다. 기본타입이 보내질 때는 URl이 가능한 형태만 가능합 그래서 타입을 바꿔줘야함
+		//여러 파일을 받을 때는 배열 아니면 리스트 둘중하나만 해야한다.
 		
-		System.out.println(img); 
-		System.out.println(img.getOriginalFilename());
+		
+		for(int i =0; i<imgs.length; i++){
+			
+		MultipartFile img = imgs[i];
+		 if(img.isEmpty())
+			 continue;
+		String urlPath="/image/menu/"+img.getOriginalFilename(); //spring.servlet.multipart.file-size-threshold= 1MB: 메모리가 아닌 1MB이상이면 하드 디스크를 사용하게 명령어를 쓰지않고 사용자는 디렉터리구종달을 기쁘
+		String realPath = request.getServletContext().getRealPath(urlPath); //main 폴더의 기준임 하지만 이렇게 알아내면 request라는 도구를 얻어내야함-> 프론트 컨트롤러가 모든것을 걷어낼 수는 없다.
+		
+		//realPath= this.getClass().getResource("").getPath();
+		
+//		OutputStream fos= new FileOutputStream(realPath);
+//		InputStream fis = img.getInputStream();
+//		//img.transferTo(new File(realPath));
+//		byte[] buf = new byte[1024];
+//		int size = 1024;
+//		while((size =fis.read(buf))!=-1) {
+//			fos.write(buf,0,size);
+//			
+//		}
+//		fis.close();
+//		fos.close();
+//		return "ok";
+		img.transferTo(new File(realPath));
+	}
 		return "ok";
 	}
+	
 	
 	@RequestMapping("index")
 	public String hello(Model model, HttpServletResponse response) throws UnsupportedEncodingException {
