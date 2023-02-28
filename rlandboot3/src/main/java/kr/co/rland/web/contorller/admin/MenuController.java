@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 
 import java.net.URLDecoder;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +16,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import kr.co.rland.web.repository.MenuRepository;
 
 
 @Controller("adminMenuController")
 @RequestMapping("/admin/menu")
 public class MenuController {
+	
+	/*
+	 * private MenuRepository menuRepository;
+	 * 
+	 * public MenuController() {
+	 * 
+	 * }
+	 * 
+	 * 
+	 * public MenuController(MenuRepository menuRepository) { super();
+	 * 
+	 * }
+	 * 
+	 * @Autowired public void setMenuRepository(MenuRepository menuRepository) {
+	 * this.menuRepository = menuRepository; }
+	 */
+	
 	
 	@RequestMapping("list")
 	public String list(

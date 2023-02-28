@@ -24,12 +24,17 @@ public class Menu { //db와 연결된 그릇 -> 생성자 기본생성자 getter
 
 	public Menu(long id, String name, int price, Date regDate, int categoryId, long regMemberId) {
 		//모든 데이터를 가져오는 데이터
+		super();
 		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.regDate = regDate;
 		this.categoryId = categoryId;
 		this.regMemberId = regMemberId;
+	}
+	public Menu() {
+		//기본생성자
+
 	}
 	
 

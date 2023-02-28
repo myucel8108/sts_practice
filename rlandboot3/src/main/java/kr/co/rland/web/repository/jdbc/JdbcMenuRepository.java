@@ -8,12 +8,68 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.sql.DataSource;
+
+import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
+
+import com.zaxxer.hikari.HikariDataSource;
+
 import kr.co.rland.web.entity.Menu;
 import kr.co.rland.web.repository.MenuRepository;
 
 public class JdbcMenuRepository implements MenuRepository {
+	
+	 @Override
+	 public List<Menu> findAll() {
+		 
+			/*
+			 * String sql = String.
+			 * format("select id, name, price, regDate, categoryId , regMemberId from menu"
+			 * );
+			 * 
+			 * //스프링을 통해 사용하는 기본 데이터 소스 DataSourceBuilder dataSourceBuilder =
+			 * DataSourceBuilder.create();
+			 * dataSourceBuilder.driverClassName("org.mariadb.jdbc.Driver"); //드라이버 이름
+			 * dataSourceBuilder.url("jdbc:mariadb://db.newlecture.com:3306/rlanddb"); //url
+			 * dataSourceBuilder.username("rland"); //시용자명
+			 * dataSourceBuilder.password("20220823"); //비밀번호 DataSource dataSource =
+			 * dataSourceBuilder.build();//정보를 전달하기
+			 * 
+			 * 
+			 * 
+			 * JdbcTemplate template = new JdbcTemplate(dataSource);
+			 * 
+			 * List<Menu> list = template.query(sql, new BeanPropertyRowMapper(Menu.class));
+			 * //우리가 작성해야할 내용에서 나머지는 라이브러리가 해주는 것 필터링 집계 정렬을 한번에!
+			 */
+		 
+		
+		String sql = "select id, name, price, regDate, categoryId from menu";
 
-   @Override
+		DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+		dataSourceBuilder.driverClassName("org.mariadb.jdbc.Driver");
+		dataSourceBuilder.url("jdbc:mariadb://db.newlecture.com:3306/rlanddb");
+		dataSourceBuilder.username("rland");
+		dataSourceBuilder.password("20220823");
+
+		DataSource dataSource = dataSourceBuilder.build();
+
+		JdbcTemplate template = new JdbcTemplate(dataSource);		
+		List<Menu> list = template.query(sql, new BeanPropertyRowMapper(Menu.class));
+		 return list;
+		 
+		 
+	 }
+	 
+	 
+	
+}
+
+//기존에 사용하던 방식
+/*   @Override
    public List<Menu> findAll() {
       // TODO Auto-generated method stub
 
@@ -27,7 +83,7 @@ public class JdbcMenuRepository implements MenuRepository {
 
          Statement st = con.createStatement();
          ResultSet rs = st.executeQuery(sql);
-
+         //con.setAutoCommit(false); 무언가 sql를 실행하고 바로 오토로 커밋시켜주는 것
          // 필터링, 집계, 정렬
          while (rs.next()) // 서버의 커서를 한칸 내리고 그 위치의 레코드를 옮겨 오는 것. -> 레코드 하나가 저장되는 공간은?
          {
@@ -40,11 +96,13 @@ public class JdbcMenuRepository implements MenuRepository {
             Menu menu = new Menu(id, name, price, regDate,categoryId,regMemberId);
             list.add(menu);
          }
+         con.commit();
          con.close();
       } catch (Exception e) {
+    	  //con.rollback;
          e.printStackTrace();
       }
       return list;
 
    }
-}
+}*/

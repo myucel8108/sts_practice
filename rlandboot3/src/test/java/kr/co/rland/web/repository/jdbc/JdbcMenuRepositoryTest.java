@@ -21,9 +21,7 @@ class JdbcMenuRepositoryTest {
 		//함수를 테스트해보고 싶을 때 사용하는 것
 		MenuRepository repository = new JdbcMenuRepository();
 		List<Menu> list =  repository.findAll();
-		
 		System.out.println(list.size());
-		assertNull(repository.findAll());
 	}
 
 }
