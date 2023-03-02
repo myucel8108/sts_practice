@@ -7,7 +7,7 @@
     <!-- bean definitions here -->
 	<bean name ="repository" class="kr.co.rland.web.repository.mybatis.MbMenuRepository"></bean>
 	
-	<bean class="kr.co.rland.web.service.DefaultMenuService"> <!--이부분이 injection 객체를 조립하는 방식 -->
+	<bean name="service" class="kr.co.rland.web.service.DefaultMenuService"> <!--이부분이 injection 객체를 조립하는 방식 -->
 		<property name="repository" ref="repository"></property>
 	</bean>
 	

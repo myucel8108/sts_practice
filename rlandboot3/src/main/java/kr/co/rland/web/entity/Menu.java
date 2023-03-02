@@ -5,8 +5,10 @@ import java.util.Date;
 public class Menu { //db와 연결된 그릇 -> 생성자 기본생성자 getter setter tostring
 
 	private long id;
+
 	private String name;
 	private int price;
+	@Column(value = "reg_Date")
 	private Date regDate;
 	private int categoryId;
 	private long regMemberId;

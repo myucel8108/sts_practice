@@ -17,28 +17,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.rland.web.repository.MenuRepository;
+import kr.co.rland.web.service.MenuService;
 
 
 @Controller("adminMenuController")
 @RequestMapping("/admin/menu")
 public class MenuController {
 	
-	/*
-	 * private MenuRepository menuRepository;
-	 * 
-	 * public MenuController() {
-	 * 
-	 * }
-	 * 
-	 * 
-	 * public MenuController(MenuRepository menuRepository) { super();
-	 * 
-	 * }
-	 * 
-	 * @Autowired public void setMenuRepository(MenuRepository menuRepository) {
-	 * this.menuRepository = menuRepository; }
-	 */
-	
+//	  private MenuRepository menuRepository;
+	@Autowired //전처리나 후처리에서 할 필요가 없어서
+	  private MenuService service;
+
 	
 	@RequestMapping("list")
 	public String list(
@@ -57,8 +46,7 @@ public class MenuController {
 		myCookie = URLDecoder.decode(myCookie, "utf-8");
 		System.out.println(myCookie);
 
-		System.out.println(page);
-		System.out.println(qurey);
+		System.out.println(service.getList());
 		return "/WEB-INF/view/admin/menu/list.jsp";
 	}
 	@RequestMapping("detail")
