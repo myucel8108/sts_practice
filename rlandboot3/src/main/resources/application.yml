@@ -1,7 +1,10 @@
 
 spring:
-  datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://db.newlecture.com:3306/rlanddb?autoReconnect=true
-    username: rland
-    password: 20220823
+  profiles:
+    active:
+    - dev
+    
+    
+mybatis:
+  mapper-locations:
+  - classpath*:mapper/*Mapper.xml

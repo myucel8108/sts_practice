@@ -22,7 +22,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import kr.co.rland.web.entity.Menu;
 import kr.co.rland.web.repository.MenuRepository;
 
-@Repository
+//@Repository
 public class JdbcMenuRepository implements MenuRepository {
 
 	@Autowired
@@ -67,6 +67,30 @@ public class JdbcMenuRepository implements MenuRepository {
 		List<Menu> list = template.query(sql, new BeanPropertyRowMapper(Menu.class));
 		return list;
 
+	}
+
+	@Override
+	public Menu findById(long id) {
+	
+		return null;
+	}
+
+	@Override
+	public Menu insert(Menu menu) {
+
+		return null;
+	}
+
+	@Override
+	public Menu update(Menu menu) {
+	
+		return null;
+	}
+
+	@Override
+	public void delete(long id) {
+
+		
 	}
 
 }

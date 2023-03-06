@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,31 +13,31 @@
 			<fieldset>
 				<legend>메뉴 입력 필드</legend>
 				<div>
-					<label>제목 : </label>
-					<input type="text" name="title">
+					<label>제목 : </label> <input type="text" name="title">
 				</div>
-				
+
 				<div>
 					<input type="submit" value="등록">
-				</div>				
+				</div>
 			</fieldset>
 		</form>
-		
-		<form action="/upload" method="post" enctype="multipart/form-data"> <!-- 인코딩할때 URL이 아닌 멀티타잉으로 보내줘야함 -->
+
+		<form action="/upload" method="post" enctype="multipart/form-data">
+			<!-- 인코딩할때 URL이 아닌 멀티타잉으로 보내줘야함 -->
 			<fieldset>
 				<legend>사진 입력 필드</legend>
 				<div>
-		
+
 					<input type="file" name="imgs">
 				</div>
 				<div>
-		
+
 					<input type="file" name="imgs">
 				</div>
-				
+
 				<div>
 					<input type="submit" value="업로드">
-				</div>				
+				</div>
 			</fieldset>
 		</form>
 	</section>
