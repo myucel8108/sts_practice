@@ -34,7 +34,7 @@ public class MenuController {
 			@RequestParam(name= "p" ,defaultValue = "1") int page ,
 			@RequestParam(name ="q" , required = false ) String qurey
 				, HttpServletRequest req
-				, @CookieValue("my") String myCookie
+//				, @CookieValue("my") String myCookie
 			) throws UnsupportedEncodingException {
 //		String 	mycookie = "";
 //		Cookie[] cookies = req.getCookies();
@@ -43,8 +43,8 @@ public class MenuController {
 //				mycookie = cookie.getValue();
 //				break;
 //			}
-		myCookie = URLDecoder.decode(myCookie, "utf-8");
-		System.out.println(myCookie);
+//		myCookie = URLDecoder.decode(myCookie, "utf-8");
+//		System.out.println(myCookie);
 
 		System.out.println(service.getList());
 		return "/WEB-INF/view/admin/menu/list.jsp";
