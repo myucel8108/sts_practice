@@ -27,7 +27,7 @@ public class Config {
 		//스프링에서는 콩자루에 담겨줄거기 때문에 객체를 만드는 것이 아닌 함수명만 지어준 것이 된다.
 		//객체를 만들어달라는 xml과 똑같은 방식이다.
 		
-		
+				
 		return new JdbcMenuRepository();
 	}
 	@Bean
