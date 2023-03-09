@@ -14,6 +14,15 @@ public class Menu { //db와 연결된 그릇 -> 생성자 기본생성자 getter
 	private Integer categoryId;
 	private long regMemberId;
 	
+	public Menu(String name, Integer price, String img, Integer categoryId, long regMemberId) {
+		super();
+		this.name = name;
+		this.price = price;
+		this.img = img;
+		this.categoryId = categoryId;
+		this.regMemberId = regMemberId;
+	}
+
 	public Menu() {
 
 	}
@@ -83,6 +92,13 @@ public class Menu { //db와 연결된 그릇 -> 생성자 기본생성자 getter
 		this.regDate = regDate;
 		this.categoryId = categoryId;
 		this.regMemberId = regMemberId;
+	}
+
+	public Menu(String name, Integer price, Integer categoryId) {
+		super();
+		this.name = name;
+		this.price = price;
+		this.categoryId = categoryId;
 	}
 	
 

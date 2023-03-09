@@ -10,19 +10,32 @@ import org.springframework.stereotype.Repository;
 import kr.co.rland.web.entity.Menu;
 import kr.co.rland.web.repository.MenuRepository;
 
-@Repository
+//@Repository
 public class MbMenuRepository implements MenuRepository {
 	
-	@Autowired	
+	//private SqlSessionFactory factory;
 	private SqlSession session;
-	
+	private MenuRepository repository;
+	public MbMenuRepository(){
+		
+	}
+
+
 	//overload 지원할려는 방식
+	
+	@Autowired
+	public MbMenuRepository(SqlSession session) {
+		this.session =session;
+		this.repository = session.getMapper(MenuRepository.class);
+	}
 
 	@Override
 	public List<Menu> findAll(Integer offset, Integer size, String query, Integer categoryId, Integer price,
 			String orderField, String orderDir) {
-		// TODO Auto-generated method stub
-		return null;
+		MenuRepository repository=session.getMapper(MenuRepository.class);
+		//mapper 콩자루에서 가져오는 방식
+		return repository.findAll(offset,size,query, categoryId, price, orderField, orderDir);
+
 	}
 
 	@Override
@@ -59,14 +72,28 @@ public class MbMenuRepository implements MenuRepository {
 		return repository.findAllByIds(ids);
 	}
 
-	@Override
-	public List<Menu> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 
-//	
+
+
+	@Override
+	public Integer count(String query, Integer categoryId, Integer price) {
+		// TODO Auto-generated method stub
+	
+		return repository.count(query,categoryId,price);
+	}
+
+//	@Override
+//	public List<Menu> findAll() {
+//		// TODO Auto-generated method stub
+//		return session.selectList("kr.co.rland.web.repository.MenuRepository.findAll"); //단일객체반황 map list를 반환하는 의미의 selectList이다.
+//	}
+//
+//	@Override
+//	public List<Menu> findAll(Integer offset, Integer size) {
+//		MenuRepository repository=session.getMapper(MenuRepository.class);
+//		return repository.findAll(offset,size,null,null ,null ,null ,null);
+//	}
+
 //	@Autowired
 //	private SqlSession session;
 //	//mybatis는 저장소를 따로 가지고 있다 Mapper라는 어노테이션을 사용했을 때 사실은 IOC 컨테이너를 사용하는 것이 아니다.
