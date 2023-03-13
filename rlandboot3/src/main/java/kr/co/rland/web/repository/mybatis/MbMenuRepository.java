@@ -51,9 +51,9 @@ public class MbMenuRepository implements MenuRepository {
 	}
 
 	@Override
-	public Menu update(Menu menu) {
+	public void update(Menu menu) {
 		// TODO Auto-generated method stub
-		return null;
+
 	}
 
 	@Override

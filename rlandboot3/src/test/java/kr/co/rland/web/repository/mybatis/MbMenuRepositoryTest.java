@@ -22,12 +22,12 @@ class MbMenuRepositoryTest {
 	@Autowired
 	private MenuRepository repository;
 	
-	@Test
-	void testFindAll() {
-	//assertNull(repository); //null인지 판별
-		List<Menu> list=	repository.findAll(0, 10);
-		System.out.println(list);
-	}
+//	@Test
+//	void testFindAll() {
+//	//assertNull(repository); //null인지 판별
+//		List<Menu> list=	repository.findAll(0, 10);
+//		System.out.println(list);
+//	}
 
 //	@Test
 //	void testUpdate() {

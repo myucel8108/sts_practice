@@ -13,7 +13,7 @@ public interface MenuRepository {
 	//#과 $에 차이 id가 문자열이면 #은 문자열에 맞게 포함되고 $를 쓰면 안붙어줌 
 	Menu findById(long id);
 	Menu insert(Menu menu);
-	Menu update(Menu menu);
+	void update(Menu menu);
 	void delete(long id);
 	//자바에서 여러번 호출하는 것을 막기 위한 라이브러리에 방법
 	List<Menu> findAllByIds(List<Long> ids);	

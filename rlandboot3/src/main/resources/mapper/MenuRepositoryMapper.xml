@@ -87,21 +87,20 @@
 		values(#{name}, #{price}, #{img},#{categoryId}, #{regMemberId});
 	</insert>
 
-	<update id="update" parameterType="kr.co.rland.web.entity.Menu">
+	<update id="update" parameterType="Menu">
 	update menu
-
 	<trim prefix="SET" suffixOverrides=",">
 	<if test="name != null">
 	name =#{name},
 	</if>
 	<if test="price != null">
-	price #{price},
+	price = #{price},
 	</if>
 	<if test="img != null">
 	img =#{img}
 	</if>
 	</trim>
-	where id=#{id};
+	where id=#{id}
 	</update>
 
 	<delete id="delete">
