@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.rland.web.entity.Menu;
+import kr.co.rland.web.entity.MenuView;
 import kr.co.rland.web.repository.MenuRepository;
 
 //@Repository
@@ -80,6 +81,14 @@ public class MbMenuRepository implements MenuRepository {
 		// TODO Auto-generated method stub
 	
 		return repository.count(query,categoryId,price);
+	}
+
+
+	@Override
+	public List<MenuView> findViewAll(Integer offset, Integer size, String query, Integer categoryId, Integer price,
+			String orderField, String orderDir) {
+		
+		return null;
 	}
 
 //	@Override

@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Menu { //db와 연결된 그릇 -> 생성자 기본생성자 getter setter tostring
 
-	private long id;
+	private Long id;
 
 	private String name;
 	private Integer price;

@@ -1,6 +1,7 @@
 package kr.co.rland.web.contorller;
 
 import java.io.File;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -73,7 +74,7 @@ public class HomeController { //pojo는 마음대로 이름을 설정해도된�
 		
 		model.addAttribute("data", data);
 		
-		return "/WEB-INF/view/index.jsp";
+		return "index";
 	}
 
 	
