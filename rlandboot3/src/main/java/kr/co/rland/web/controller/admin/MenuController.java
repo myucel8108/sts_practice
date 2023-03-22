@@ -2,6 +2,7 @@ package kr.co.rland.web.controller.admin;
 
 
 import java.io.UnsupportedEncodingException;
+
 import java.net.URLDecoder;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.rland.web.repository.MenuRepository;
-import kr.co.rland.web.repository.jdbc.JdbcMenuReposiory;
 import kr.co.rland.web.service.MenuService;
 
 // 이름 설정을 admin 안붙여서 안해놓으면 일반위의 MenuController랑 이름이 겹치게 돼서 오류남.
