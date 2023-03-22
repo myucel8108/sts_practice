@@ -1,109 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 이게 팩토리가 읽는 것임! mappercontainer의 내용은 세션 팩토리!-> 보따리! ex 서블릿 컨테이너를 생각하면 
-	된다. 스프링 컨테이너의 실질적인 이름은 IOC컨테이너-> 어플리케이션 컨텍스트 -> bean container mybatis는 mapper객체 
-	mapper컨테이너가 담고있다. 실질적인 이름은 sqlSessionFactory ->openSession으로 설정을 끌고 올 수 있다. -->
+<!-- 이거 MenuRepository의 Getter를 쓰는거임 (무조건 Getter있어야함) -->
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.rland.web.repository.MenuRepository">
-
+	   <resultMap id="menuViewResultMap" type="MenuView">
+      <result property="regDate" column="reg_date" />
+      <result property="categoryId" column="category_id" />
+      <result property="categoryName" column="category_name"/>
+      <result property="regMemberId" column="reg_member_id" />
+   </resultMap>
+	
 	<resultMap id="menuResultMap" type="Menu">
 		<result property="regDate" column="reg_date" />
 		<result property="categoryId" column="category_id" />
 		<result property="regMemberId" column="reg_member_id" />
-
 	</resultMap>
+
 
 	<select id="findAll" resultMap="menuResultMap">
 		select *
 		from menu
-		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+		<trim prefix="where" prefixOverrides="AND |OR ">
 			<if test="query != null">
-				name like '%${query}%'
-			</if>
+				name like '%${query}%'</if>
 			<if test="price != null">
-				and price > #{price}
-			</if>
+				and price > #{price}</if>
 			<if test="categoryId != null">
-				and categoryId=#{categoryId}
-			</if>
+				and categoryId=#{categoryId}</if>
 		</trim>
-		<if test="orderField != null">
-			order by ${orderField} ${orderDir}
-		</if>
-		<if test="size != null">
-			limit #{size} offset #{offset}
-		</if>
+			<if test="orderField != null">
+				order by ${orderField} ${orderDir}</if>
+			<if test="size != null">
+				limit #{size} offset #{offset}</if>
+	</select>
+	
+	<select id="findViewAll" resultMap="menuViewResultMap">
+      select *
+      from menu_view
+      <trim prefix="WHERE" prefixOverrides="AND |OR ">
+         <if test="query != null">
+            name like '%${query}%'
+         </if>
+         <if test="price != null">
+            and price > #{price}
+         </if>
+         <if test="categoryId != null">
+            and category_id=#{categoryId}
+         </if>
+      </trim>
+	      <if test="orderField != null">
+	         order by ${orderField} ${orderDir}
+	      </if>
+	      <if test="size != null">
+	         limit #{size} offset #{offset}
+	      </if>
+	</select>
+	
+	
+	<select id="findById" resultType="Menu">
+		select *
+		from menu
+		where id=#{id}
 	</select>
 
+
 	<select id="findAllByIds" resultMap="menuResultMap">
-		select count(id) count
+		select *
 		from menu
-
-		<trim prefix="WHERE" prefixOverrides="AND |OR ">
-			<if test="query != null">
-				name like '%${query}%'
-			</if>
-			<if test="price != null">
-				and price > #{price}
-			</if>
-			<if test="categoryId != null">
-				and categoryId=#{categoryId}
-			</if>
-		</trim>
-
 		<where>
-			<foreach item="id" index="index" collection="ids"
-				open=" id in(" separator="," close=")">
+			<foreach item="id" collection="ids" open="id in ("
+				separator="," close=")">
 				#{id}
 			</foreach>
 		</where>
 	</select>
-
-
-	<select id="findById" resultMap="menuResultMap">
-		select *
-		from menu
-		where id= #{id}
-	</select>
-
+	
 	<select id="count" resultType="Integer">
-		select count(id) from menu
-		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+		select count(*) count
+		from menu
+		<trim prefix="where" prefixOverrides="AND |OR ">
 			<if test="query != null">
-				name like '%${query}%'
-			</if>
+				name like '%${query}%'</if>
 			<if test="price != null">
-				and price > #{price}
-			</if>
+				and price > #{price}</if>
 			<if test="categoryId != null">
-				and categoryId=#{categoryId}
-			</if>
+				and categoryId=#{categoryId}</if>
 		</trim>
 	</select>
 
 	<insert id="insert" parameterType="Menu">
 		insert into menu(name, price, img, category_id, reg_member_id)
-		values(#{name}, #{price}, #{img},#{categoryId}, #{regMemberId});
+		values(#{name},#{price},#{img},#{categoryId},#{regMemberId})
 	</insert>
-
+	
 	<update id="update" parameterType="Menu">
-	update menu
-	<trim prefix="SET" suffixOverrides=",">
-	<if test="name != null">
-	name =#{name},
-	</if>
-	<if test="price != null">
-	price = #{price},
-	</if>
-	<if test="img != null">
-	img =#{img}
-	</if>
-	</trim>
-	where id=#{id}
+		update menu
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="name != null"> name=#{name},</if>
+			<if test="price != null"> price = #{price},</if>
+			<if test="img != null"> img=#{img}</if>
+		</trim>
+		where id=#{id}
 	</update>
-
+	
 	<delete id="delete">
-	delete from menu where id=${id}
+		delete from menu where id=${id}
 	</delete>
+	
 </mapper>
+

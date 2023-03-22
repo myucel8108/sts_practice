@@ -1,0 +1,96 @@
+package kr.co.rland.web.controller;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import kr.co.rland.web.dto.SampleLogin;
+import kr.co.rland.web.service.LoginService;
+
+@Controller
+@RequestMapping("/")
+public class HomeController {
+	
+	@Autowired
+	private LoginService loginservice;
+	
+	
+	@PostMapping("upload")
+	@ResponseBody
+	public String upload(MultipartFile[] imgs, HttpServletRequest request) throws IllegalStateException, IOException {
+
+		for (int i = 0; i < imgs.length; i++) 
+		{
+			MultipartFile img = imgs[i];
+			
+			if(img.isEmpty())
+				continue;
+			
+			String urlPath = "/image/menu/" + img.getOriginalFilename();
+			String realPath = request.getServletContext().getRealPath(urlPath);// this.getClass().getResource("");
+		
+			//		realPath = this.getClass().getResource("/").getPath();
+
+			System.out.println(realPath);
+
+			//		InputStream fis = img.getInputStream();		
+			//		OutputStream fos = new FileOutputStream(realPath);		
+			//		// 1024 저장공간
+			//		byte[] buf = new byte[1024];
+			//		int size = 1024;
+			//		// buf가 다 채워지지 않더라도 채운만큼만 저장될 수 있도록
+			//		while((size = fis.read(buf))!=-1)
+			//			fos.write(buf, 0, size);
+			//		
+			//		fis.close();
+			//		fos.close();
+
+			img.transferTo(new File(realPath));
+		}
+
+//		System.out.println(img.getOriginalFilename());
+		return "ok";
+	}
+
+	@RequestMapping("index")
+	public String index(Model model, HttpServletResponse response) throws UnsupportedEncodingException {
+
+//		String data = URLEncoder.encode("cookie래요~", "utf-8");
+//
+//		System.out.println(data);
+//
+//		Cookie cookie = new Cookie("my", data);
+//		response.addCookie(cookie);
+//
+//		model.addAttribute("data", data);
+
+		return "index";
+	}
+
+	@GetMapping("login")
+	public String GETlogin(Model model, HttpServletRequest request) {
+
+		return "login";
+	}
+	@PostMapping("login")
+	public String POSTlogin(
+			@RequestParam("id") String id,
+			@RequestParam("pwd") String pwd) {
+			
+		SampleLogin inputLogin = new SampleLogin(id, pwd);
+		loginservice.Login(inputLogin);
+		return "login";
+	}
+}
