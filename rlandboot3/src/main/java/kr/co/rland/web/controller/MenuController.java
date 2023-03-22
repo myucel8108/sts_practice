@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import kr.co.rland.web.entity.Category;
 import kr.co.rland.web.entity.Menu;
 import kr.co.rland.web.entity.MenuView;
+import kr.co.rland.web.entity.RcmdMenuView;
 import kr.co.rland.web.service.CatagoryService;
 import kr.co.rland.web.service.MenuService;
+import kr.co.rland.web.service.RcmdMenuService;
 
 // 이걸 안써두면 스프링이 안읽음.
 //@RestController
@@ -29,6 +31,9 @@ public class MenuController {
 	
 	@Autowired
 	private CatagoryService categoryService;
+	
+	@Autowired
+	private RcmdMenuService rcmdMenuService;
 	
 	@GetMapping("list")
 	public String list(Model model,
@@ -55,10 +60,12 @@ public class MenuController {
 	@GetMapping("detail")
 	public String detail(int id, Model model) {
 		
-		Menu menu = service.getById(id);
-		
+		Menu menu = service.getById(id);	
 		model.addAttribute("menu",menu);
 		
+		List<RcmdMenuView> rcmdMenuList =  rcmdMenuService.getViewListByMenuId(id);
+		model.addAttribute("rcmdMenuList",rcmdMenuList);
+		System.out.println(rcmdMenuList);
 		return "menu/detail";
 	}
 	
