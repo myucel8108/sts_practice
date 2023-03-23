@@ -21,6 +21,12 @@ public class DefaultCategoryService implements CatagoryService{
 		return repository.findAll();
 	}
 
+	@Override
+	public String getNameById(Integer id) {
+		// TODO Auto-generated method stub
+		return repository.findById(id).getName();
+	}
+
 
 
 

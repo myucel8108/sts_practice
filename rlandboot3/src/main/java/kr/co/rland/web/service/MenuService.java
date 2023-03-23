@@ -33,4 +33,5 @@ public interface MenuService {
 	Menu getById(long id);
 	
 	void pointUp();
+
 }

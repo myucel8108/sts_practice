@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import kr.co.rland.web.dto.SampleLogin;
 import kr.co.rland.web.service.LoginService;
 
-@Controller
+@Controller //문서를 만들어주는 방식 문서명을 return해달라!
 @RequestMapping("/")
 public class HomeController {
 	

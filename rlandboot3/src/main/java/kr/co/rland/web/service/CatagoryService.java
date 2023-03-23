@@ -8,4 +8,7 @@ public interface CatagoryService {
 	
 	List<Category> getList();
 
+	String getNameById(Integer categoryId);
+
+
 }

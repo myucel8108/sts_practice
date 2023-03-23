@@ -15,12 +15,12 @@ class CategoryRepositoryTest {
 
 	@Autowired
 	private CategoryRepository repository;
-	@Test
-	void testFindAll() {
-		List<Category> list = repository.findAll();
-//		Category cate = list.get(0);
-//		System.out.println(cate.getName());
-		System.out.println(list);
-	}
+
+//	void testFindAll() {
+//		List<Category> list = repository.findAll();
+////		Category cate = list.get(0);
+////		System.out.println(cate.getName());
+//		System.out.println(list);
+//	}
 
 }

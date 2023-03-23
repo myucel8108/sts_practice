@@ -60,12 +60,19 @@ public class MenuController {
 	@GetMapping("detail")
 	public String detail(int id, Model model) {
 		
+//		String categoryName = service.getCategoryNameById(id);
+		
+//		int cateCount = categoryService.getCountByName();
+		
 		Menu menu = service.getById(id);	
-		model.addAttribute("menu",menu);
+		
+		String categoryName = categoryService.getNameById(menu.getCategoryId());
+		
 		
 		List<RcmdMenuView> rcmdMenuList =  rcmdMenuService.getViewListByMenuId(id);
+		model.addAttribute("categoryName",categoryName);
+		model.addAttribute("menu",menu);
 		model.addAttribute("rcmdMenuList",rcmdMenuList);
-		System.out.println(rcmdMenuList);
 		return "menu/detail";
 	}
 	
