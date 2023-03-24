@@ -54,7 +54,7 @@ public class MenuController {
 		
 //		List<MenuView> list = service.getViewList();
 //		System.out.println(list);
-		return "menu/list"; //Tiles에게 조립 하고픈 목록 주고 조립해달라 해야함
+		return "menu/list2"; //Tiles에게 조립 하고픈 목록 주고 조립해달라 해야함
 	}
 	
 	@GetMapping("detail")
@@ -73,7 +73,7 @@ public class MenuController {
 		model.addAttribute("categoryName",categoryName);
 		model.addAttribute("menu",menu);
 		model.addAttribute("rcmdMenuList",rcmdMenuList);
-		return "menu/detail";
+		return "menu/detail2";
 	}
 	
 	

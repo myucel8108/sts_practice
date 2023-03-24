@@ -10,14 +10,7 @@ import kr.co.rland.web.entity.MenuView;
 
 @Mapper
 public interface MenuRepository {
-	List<Menu> findAll(
-			Integer offset, 
-			Integer size,
-			String query,
-			Integer categoryId,
-			Integer price,
-			String orderField,
-			String orderDir);
+	List<Menu> findAll();
 	
 	List<MenuView> findViewAll(
 			Integer offset, 

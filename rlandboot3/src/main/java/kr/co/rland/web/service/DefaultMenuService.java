@@ -24,7 +24,7 @@ public class DefaultMenuService implements MenuService {
 	@Override
 	public List<Menu> getList() {
 		
-		return repository.findAll(0,10,"",1,3000,"regDate","desc");
+		return repository.findAll();
 	}
 	
 	@Transactional

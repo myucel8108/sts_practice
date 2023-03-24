@@ -26,7 +26,7 @@ class MenuRepositoryTest {
 
 	@Test
 	void testFindAll() {
-		List<Menu> list = repository.findAll(0, 10, null, null, null, null, null);
+		List<Menu> list = repository.findAll();
 //		Menu list = repository.findById(753L);
 		System.out.println(list);
 //		System.out.println(repository);
