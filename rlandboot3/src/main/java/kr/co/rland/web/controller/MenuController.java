@@ -51,7 +51,7 @@ public class MenuController {
 //		service.getList(1,1); //페이지,카테고리
 //		service.getList(1,1,"아"); //페이지,카테고리,쿼리
 		
-		
+
 //		List<MenuView> list = service.getViewList();
 //		System.out.println(list);
 		return "menu/list2"; //Tiles에게 조립 하고픈 목록 주고 조립해달라 해야함

@@ -33,7 +33,12 @@ public class MenuController {
 		//원래는 문서 url이 와야하는데..? restcontroller에게 요청하면 데이터를 받는다! url를 받는것이 아니다. 
 									 //객체는 json형식으로 바꿔서 보내준다.
 		List<MenuView> list = service.getViewList(page, size, query);
-		
+//		try {
+//			Thread.sleep(10000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		return list;
 		//전에는 /menu/list라고url처럼 줬는데 지금은 왜 저런방식으로 주나?-> 데이터를 달라는 거기 때문에 
 		//menu/list->이러한 페이지를 줘
