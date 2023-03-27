@@ -27,7 +27,7 @@ public class MenuController {
 
 	@GetMapping
 	public List<MenuView> getList(
-			@RequestParam("p") int page,
+			@RequestParam(name="p", defaultValue = "1" ,required = false) int page,
 			@RequestParam(name ="c" , required = false )  int size,  //required를 사용하면 필수값으로 할지 안할지 알려줄수있다.
 			@RequestParam(name ="q" , required = false )  String query){  
 		//원래는 문서 url이 와야하는데..? restcontroller에게 요청하면 데이터를 받는다! url를 받는것이 아니다. 

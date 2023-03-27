@@ -3,11 +3,14 @@ package kr.co.rland.web.controller.admin;
 
 import java.io.UnsupportedEncodingException;
 
+
 import java.net.URLDecoder;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.co.rland.web.entity.Menu;
+import kr.co.rland.web.entity.MenuView;
 import kr.co.rland.web.repository.MenuRepository;
 import kr.co.rland.web.service.MenuService;
 
@@ -49,9 +54,11 @@ public class MenuController {
 	public String list(
 			@RequestParam(name="p", defaultValue = "1") int page,
 			@RequestParam(name="q", required = false) String query,
-			@CookieValue("my") String myCookie, 
+			@RequestParam(name="c", required = false) Integer categoryId,
+			@CookieValue(name ="my", required = false) String myCookie, 
 			@RequestHeader(HttpHeaders.ACCEPT_LANGUAGE) String language 
 //			HttpServletRequest request
+			,Model model
 			) throws UnsupportedEncodingException {
 		
 //		String myCookie ="";
@@ -63,17 +70,20 @@ public class MenuController {
 //			}
 //		}
 		
-		System.out.printf("Accept-Language : %s\n",language);
-		myCookie = URLDecoder.decode(myCookie, "utf-8");
-		System.out.println(myCookie);
+//		System.out.printf("Accept-Language : %s\n",language);
+//		myCookie = URLDecoder.decode(myCookie, "utf-8");
+//		System.out.println(myCookie);
+//		
+//		System.out.println(page);
+//		System.out.println(query);
+//		for(int i=0; i<service.getList().size() ; i++) {
+//			System.out.println(service.getList().get(i));	
+//		}
+//		System.out.println(service.getList());
+		List<MenuView> list = service.getViewList(page, categoryId, query) ;
 		
-		System.out.println(page);
-		System.out.println(query);
-		for(int i=0; i<service.getList().size() ; i++) {
-			System.out.println(service.getList().get(i));	
-		}
-		System.out.println(service.getList());
-		return "/WEB-INF/view/admin/menu/list.jsp";
+		model.addAttribute("list",list);
+		return "admin/menu/list";
 	}
 	
 	@GetMapping("detail")

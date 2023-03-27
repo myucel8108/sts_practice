@@ -37,7 +37,7 @@
 					<li th:class="${param.c}==null? 'menu-selected'">
 						<a href="/">전체</a>
 					</li>
-					<li th:attr="data-cid=${c.id}"
+	 <!-- 클릭한 엘리먼트를 알아보고 싶을때  -->	<li th:attr="data-cid=${c.id}"
 					th:class="${#strings.equals(param.c,c.id)}? 'menu-selected'" th:each="c : ${category}">
 						<a  href="" th:href="@{list(c=${c.id})}" th:text="${c.name}">커피음료</a>
 					</li>
