@@ -28,7 +28,7 @@ public class MenuController {
 	@GetMapping
 	public List<MenuView> getList(
 			@RequestParam(name="p", defaultValue = "1" ,required = false) int page,
-			@RequestParam(name ="c" , required = false )  int size,  //required를 사용하면 필수값으로 할지 안할지 알려줄수있다.
+			@RequestParam(name ="c" , required = false )  Integer size,  //required를 사용하면 필수값으로 할지 안할지 알려줄수있다.
 			@RequestParam(name ="q" , required = false )  String query){  
 		//원래는 문서 url이 와야하는데..? restcontroller에게 요청하면 데이터를 받는다! url를 받는것이 아니다. 
 									 //객체는 json형식으로 바꿔서 보내준다.
@@ -44,7 +44,8 @@ public class MenuController {
 		//menu/list->이러한 페이지를 줘
 		//restController는 ->data /menus->메뉴 목록을 받음
 		//menus/3->메뉴에서 3번째를 달라 menu?id=3과 비슷
-		//restcontoller는 메서드의 방식으로 사용하기때문에 url이 같다!
+		//restcontoller는 메서드의 방식으로 사용하기때문에 url이 같다!//
+
 	}
 	
 	@GetMapping("{id}")

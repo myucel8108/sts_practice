@@ -12,6 +12,8 @@
 		<section>
 			<header class="search-header">
 				<h1 class="text-title1-h1" th:text=${data}>알랜드 메뉴</h1>
+					<input type="checkbox"><label>선택된 카테고리 내 검색</label>
+				
 				<form action="list" method="get">
 					<input type="hidden" name = "c" th:value="${param.c}">
 					<input type="text" name="q" th:value="${param.q}">
@@ -33,11 +35,12 @@
 				<div>
 					<h1 class="text-normal-bold">메뉴분류<span th:text =${param.c}></span></h1>
 				</div>
-				<ul >
+				<ul>
 					<li th:class="${param.c}==null? 'menu-selected'">
-						<a href="/">전체</a>
+						<a href="list">전체</a>
 					</li>
-	 <!-- 클릭한 엘리먼트를 알아보고 싶을때  -->	<li th:attr="data-cid=${c.id}"
+	 <!-- 클릭한 엘리먼트를 알아보고 싶을때  -->	
+	 <li th:attr="data-cid=${c.id}"
 					th:class="${#strings.equals(param.c,c.id)}? 'menu-selected'" th:each="c : ${category}">
 						<a  href="" th:href="@{list(c=${c.id})}" th:text="${c.name}">커피음료</a>
 					</li>
