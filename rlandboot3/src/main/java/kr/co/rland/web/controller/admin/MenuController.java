@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.websocket.Extension.Parameter;
 import kr.co.rland.web.entity.Menu;
 import kr.co.rland.web.entity.MenuView;
 import kr.co.rland.web.repository.MenuRepository;
@@ -59,7 +60,7 @@ public class MenuController {
 			@RequestHeader(HttpHeaders.ACCEPT_LANGUAGE) String language 
 //			HttpServletRequest request
 			,Model model
-			) throws UnsupportedEncodingException {
+			){
 		
 //		String myCookie ="";
 //		Cookie[] cookies = request.getCookies();
@@ -87,8 +88,10 @@ public class MenuController {
 	}
 	
 	@GetMapping("detail")
-	public String detail() {
-		return "admin menu detail";
+	public String detail(int id , Model model) {
+		Menu menu = service.getById(id);
+		model.addAttribute("menu", menu);
+		return "admin/menu/detail";
 	}
 	
 	// .admin/menu/

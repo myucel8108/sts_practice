@@ -6,6 +6,8 @@
 	>
 
 	<main layout:fragment="main">
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script type="text/javascript" src="/js/admin/menu/list" defer="defer"></script>
 		<section>
 			<header class="search-header">
 				<h1 class="text-title1-h1" th:text=${data}>알랜드 메뉴</h1>
@@ -55,7 +57,7 @@
 		                    <div class="menu-img-box">
 		                        <a href="detail" th:href="@{detail(id=${menu.id})}"><img class="menu-img" src="/image/product/12.png" th:src="@{/image/product/{img}(img=${menu.img})}"></a>
 		                    </div>    
-		                    <div class="menu-price">4500 원</div>
+		                    <div class="menu-price"th:text="${menu.price}원">4500 원</div>
 		                    <div class="menu-option-list">
 		                        <span class="menu-option">
 		                            <input class="menu-option-input" type="checkbox">
