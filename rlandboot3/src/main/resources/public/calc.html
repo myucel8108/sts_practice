@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<script type="text/javascript" src="./calc2.js" defer="defer"></script>
+<script src="./calc2.js" defer="defer"></script>
 
 </head>
 <body>
@@ -12,20 +12,19 @@
     <h1>덧셈 계산기</h1>
     <form>
         <fieldset>
-            <legend>계산{{x}}기 입력폼</legend> <!-- innertext할때 -->
+            <legend>계산기 입력폼</legend>
             <div>
                 <label>x:</label>
-                <input  dir="rtl" v-model.trim.number="x" @input="calcHandler">
+                <input dir="rtl" v-model.trim.number="x" @input="calcHandler">
                 <label>y:</label>
                 <input dir="rtl" v-model="y">
                 <span>=</span>
-              <!--   <span>{{z}}</span> -->
-			<span v-text="z"></span> 
+                <span v-text="z"></span>
             </div>
             <hr>
             <div>
-                <input type="submit" value="초기화" @click.prevnet="resetHandler">
-                <input type="submit" value="계산하기" v-on:click="calcHandler">
+                <input type="submit" value="초기화" @click.prevent="resetHandler">
+                <input type="submit" value="계산하기" v-on:click.prevent="calcHandler">
             </div>
         </fieldset>
     </form>

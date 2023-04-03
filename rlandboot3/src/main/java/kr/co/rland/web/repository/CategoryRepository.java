@@ -9,11 +9,14 @@ import kr.co.rland.web.entity.Category;
 
 @Mapper
 public interface CategoryRepository {
+	
 	List<Category> findAll();
-	Category findById(int id);
-	int insert(Category category);
-	int update(Category category);
+	
+	Category findById(Integer id);
+	
+	Category insert(Category category);
+	void update(Category category);
 	void delete(int id);
+
 	
-	
-}
+}	

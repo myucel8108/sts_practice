@@ -6,32 +6,25 @@ import kr.co.rland.web.entity.Menu;
 import kr.co.rland.web.entity.MenuView;
 
 public interface MenuService {
-	
-
-	List<Menu> getList();
-
-	List<Menu> getList(int page); //페이지 부르기
-
-	List<Menu> getList(int page, String query); //페이지, 쿼리
-
-	List<Menu> getList(int page, Integer categoryId); //페이지, 카테고리
-
-	List<Menu> getList(int page, Integer categoryId, String query); //페이지, 카테고리, 쿼리
-	
-	
-	
-	List<MenuView> getViewList();
-	
-	List<MenuView> getViewList(int page); //페이지 부르기
-
-	List<MenuView> getViewList(int page, String query); //페이지, 쿼리
-
-	List<MenuView> getViewList(int page, Integer categoryId); //페이지, 카테고리
-
-	List<MenuView> getViewList(int page, Integer categoryId, String query); //페이지, 카테고리, 쿼리
-
+		
 	Menu getById(long id);
 	
 	void pointUp();
+	
+	void add(Menu menu);
+	
+	List<Menu> getList();
+	List<Menu> getList(int page);
+	List<Menu> getList(int page, String query);
+	List<Menu> getList(int page, int category);
+	List<Menu> getList(int page, int categoryId, String query);
 
+
+	List<MenuView> getViewList();
+	List<MenuView> getViewList(int page);
+	List<MenuView> getViewList(int page, String query);
+	List<MenuView> getViewList(int page, Integer categoryId);
+	List<MenuView> getViewList(int page, Integer categoryId, String query);
+	
+	
 }

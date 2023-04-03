@@ -24,112 +24,96 @@ public class DefaultMenuService implements MenuService {
 	@Override
 	public List<Menu> getList() {
 		
-		return repository.findAll();
+		return repository.findAll(0,10,"",1,null,"regDate","desc");
 	}
-	
+
 	@Transactional
 	@Override
 	public void pointUp() {
 		Menu menu = new Menu();
-		menu.setId(919L);
-		menu.setPrice(8000);
+		menu.setId(771L);
+		menu.setPrice(20000);
 		repository.update(menu);
 		
-		menu.setName("아메리카노L");
-		menu.setRegMemberId(352L);
-		menu.setPrice(5000);
-		repository.update(menu);
-		
+		menu.setId(771L);
+		menu.setPrice(40000);
+		repository.update(menu);		
 	}
-
+	
+	@Override
+	public Menu getById(long id) {		
+		Menu menu = repository.findById(id);		
+		return menu;
+	}
 
 	@Override
 	public List<Menu> getList(int page) {
-		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 	@Override
 	public List<Menu> getList(int page, String query) {
-		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 	@Override
-	public List<Menu> getList(int page, Integer categoryId) {
-		// TODO Auto-generated method stub
+	public List<Menu> getList(int page, int category) {
 		return null;
 	}
-
 
 	@Override
-	public List<Menu> getList(int page, Integer categoryId, String query) {
-		// TODO Auto-generated method stub
+	public List<Menu> getList(int page, int categoryId, String query) {
 		return null;
 	}
-
 
 	@Override
 	public List<MenuView> getViewList() {
-		// TODO Auto-generated method stub
 		int page = 1;
 		int size = 10;
 		List<MenuView> list = repository.findViewAll(page, size, null, null, null, null, null);
 		return list;
 	}
 
-
 	@Override
 	public List<MenuView> getViewList(int page) {
-		// TODO Auto-generated method stub
-		
 		int size = 10;
 		List<MenuView> list = repository.findViewAll(page, size, null, null, null, null, null);
 		return list;
 	}
 
-
 	@Override
 	public List<MenuView> getViewList(int page, String query) {
-		// TODO Auto-generated method stub
-	
 		int size = 10;
 		List<MenuView> list = repository.findViewAll(page, size, query, null, null, null, null);
 		return list;
 	}
 
-
 	@Override
 	public List<MenuView> getViewList(int page, Integer categoryId) {
-		// TODO Auto-generated method stub
-		
 		int size = 10;
-		List<MenuView> list = repository.findViewAll(page, size, null, categoryId, null, null, null);
+		List<MenuView> list = repository.findViewAll(page, size, null, null, categoryId, null, null);
 		return list;
 	}
-
 
 	@Override
 	public List<MenuView> getViewList(int page, Integer categoryId, String query) {
-		// TODO Auto-generated method stub
-		
-		int size = 10;
-		int offset = (page-1)*size; // 1->0 , 2->10, 3->20,  페이지는 db에 없음 -> **번째 페이지를 불러야함
-		
-		
-		List<MenuView> list = repository.findViewAll(offset, size, query, categoryId, null, null, null);
+		int size = 9;
+		int offset = (page-1)*size;
+		String orderField = "reg_date";
+		String order = "desc";
+		List<MenuView> list = repository.findViewAll(offset, size, query, categoryId, null, orderField, order);
 		return list;
 	}
 
+
 	@Override
-	public Menu getById(long id) {
+	public void add(Menu menu) {
+		repository.insert(menu);
 		
-		Menu menu = repository.findById(id);
-		
-		return menu;
 	}
 
 
+	
+
 }
+

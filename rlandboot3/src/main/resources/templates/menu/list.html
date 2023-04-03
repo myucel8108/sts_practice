@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html 
-	xmlns:th = "http://www.thymeleaf.org"
-	xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="inc/layout"
-	>
-
-	<main layout:fragment="main">
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<script type="text/javascript" src="/js/admin/menu/list" defer="defer"></script>
+>
+<main layout:fragment="main">
 		<section>
 			<header class="search-header">
-				<h1 class="text-title1-h1" th:text=${data}>알랜드 메뉴</h1>
+				<h1 class="text-title1-h1" th:text="${data}">알랜드 메뉴</h1>
+				<!-- action="list" 이게 뭐지? -->
 				<form action="list" method="get">
-					<input type="hidden" name = "c" th:value="${param.c}">
+					<input type="hidden" name="c" th:value="${param.c}">
 					<input type="text" name="q" th:value="${param.q}">
 					<input type="submit" class="icon icon-find">
 				</form>
 			</header>
-<!-- 			<aside class="aside-bar">
+			<aside class="aside-bar">
 				<h1>aside</h1>
 				<section class="aside-bar-content">
 					<h1>메인메뉴</h1>
@@ -27,21 +25,23 @@
 						<li><a href="/user/login.html">로그인</a></li>
 					</ul>
 				</section>
-			</aside> -->
+			</aside>
 			<nav class="menu-category">
 				<div>
-					<h1 class="text-normal-bold">메뉴분류<span th:text =${param.c}></span></h1>
+					<h1 class="text-normal-bold">메뉴분류</h1>
 				</div>
-				<ul >
-					<li th:class="${param.c}==null? 'menu-selected'">
-						<a href="/">전체</a>
+				<ul>
+					<li class="" th:class="${param.c}==null ? 'menu-selected'">
+						<a href="list">전체</a>
 					</li>
-					<li th:class="${#strings.equals(param.c,c.id)}? 'menu-selected'" th:each="c : ${category}">
-						<a  href="" th:href="@{list(c=${c.id})}" th:text="${c.name}">커피음료</a>
-					</li>
+					<!-- 이건뭔소리여 #strings??  -->
+					<li th:each="c : ${categoryList}"
+						th:class="${#strings.equals(param.c, c.id)}? 'menu-selected'">
+						<a th:class="(${param.c}==${c.id})? 'menu-selected'" href="?c=1" th:href="@{list(c=${c.id})}" th:text="${c.name}">커피음료</a>
+					</li>					
 				</ul>
 			</nav>
-			
+
 			<section class="cart-section">
 				<h1 class="d-none">장바구니</h1>
 				<span class="text-title3">커피음료</span>
@@ -53,11 +53,12 @@
 		        <div class="menu-list">
 		            <section class="menu" th:each="menu : ${list}">
 		                <form class="">
-		                    <h1><span th:text="${menu.name}">알랜드 커피</span>/<span style="font-size:11px; vertical-align:center;" th:text="${menu.categoryName}">(커피음료)</span></h1> 
+		                    <h1><span th:text="${menu.name}">알랜드 커피</span><span style="font-size:11px;" th:text="${menu.categoryName}"> /커피메뉴</span></h1> 
 		                    <div class="menu-img-box">
-		                        <a href="detail" th:href="@{detail(id=${menu.id})}"><img class="menu-img" src="/image/product/12.png" th:src="@{/image/product/{img}(img=${menu.img})}"></a>
+		                    	<!-- detail 페이지에 id값 넘겨주는 장면 -->
+		                        <a href="detail" th:href="@{detail(id=${menu.id})}"><img class="menu-img" src="@/image/product/12.png" th:src="@{/image/menu/{img}(img=${menu.img})}"></a>
 		                    </div>    
-		                    <div class="menu-price"th:text="${menu.price}원">4500 원</div>
+		                    <div class="menu-price" th:text="${#numbers.formatInteger({menu.price},3,'COMMA')}+' 원'">4500 원</div>
 		                    <div class="menu-option-list">
 		                        <span class="menu-option">
 		                            <input class="menu-option-input" type="checkbox">
@@ -73,13 +74,12 @@
 		                        <input class="btn btn-line btn-size-1 btn-size-1-lg ml-1" type="submit" value="주문하기">
 		                    </div>
 		                </form>
-		            </section>
-
+		            </section>		            
 		        </div>
 		    </section>
 
 			<div class="d-flex justify-content-center py-3">
-				<a href="" class="btn btn-round w-100 w-50-md py-2" style="color:#000">더보기(13+)</a>
+				<a href="" class="btn btn-round w-100 w-50-md py-2">더보기(13+)</a>
 			</div>
 
 			<section class="new-menu menu-section-p">
@@ -95,4 +95,5 @@
 
 		</section>
 	</main> 
+
 </html>

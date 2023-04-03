@@ -1,60 +1,110 @@
-Vue
-.createApp({
+/**
+ * 
+ */
+ 
+ Vue
+ .createApp({
 	data(){
-	
+		
 		return{
-			test:"hello"
-		};	
+			test:"hello",
+			list:[
+				{id:1, name:"아메리카노", price:5000},
+				{id:21, name:"카페라떼", price:5700},
+				{id:31, name:"카페모카", price:5700}
+			],
+			isShowRegForm:true,
+			isShowMenu:false,
+			menu:{name:"",price:0}
+			
+		};
 	},
-	methods:{ //function임
-		  	categoryClickHandler(e){
-			this.load(2);
-			},
+	methods:{
+		menuSaveHandler(){
+			var myHeaders = new Headers();
+			myHeaders.append("Content-Type", "application/json");
 			
+			var raw = JSON.stringify(this.menu);
 			
-		 load(cid){			
-//			fetch("/menus", (response)=>{
-//				//결과 후에 실행할 코드
+			var requestOptions = {
+			  method: 'POST',
+			  headers: myHeaders,
+			  body: raw,
+			  redirect: 'follow'
+			};
+			
+			fetch("http://localhost:8080/menus?", requestOptions)
+			  .then(response => response.text())
+			  .then(result => {
+					if(result==="ok");
+					this.load();
+				})
+			  .catch(error => console.log('error', error));
+		},
+		async categoryClickHandler(e){
+//			this.load(e.target.dataset.id, function(){
+//				console.log("도착했구나..");
 //			});
 			
-			let promise = fetch("/menus111"); //menus라는 곳에서 싹다 가져온다.
-			promise
-			.then(response=>{
-				return response.json();// 중첩하지 않고 내려쓰는 다음항목에서 사용하고 싶을때 사용
-				})
-			.then(list=>{   //비동기 처리가 끝났다는 것을 의미한다.
-				console.log(list);
-				
+			this.load(2);
+//			console.log("click");
+//			await this.load(e.target.dataset.id);
+//			console.log(" 데이터가 도착한 후에 할 일");			
+			 // unshift(): 앞으로 넣는 것. , push() 뒤로, pop() 뒤부터 빼는거, 6shift() 앞에서 빼는거
+			this.list.push({id:42, name:"아이스티", price:3000});
+		},
+		load(){
+		//	fetch("/menus",(response)=>{});
+			
+			let promise = fetch("/menus")	
+			.then(response=>{				
+				return response.json();
 			})
-			.then(menu=>{
-				console.log(menu.name);
+			.then(list=>{
+				this.list = list;	
 			})
 			.catch(error=>{
-				console.log("ㅊㅊㅊ");
-
-			});
-		}
+				console.log("폭탄 받아라~~!!",error);
+			});		
 			
-			
-//			promise.then(response=>{
+//			console.log("나도 끼쥐~");
 //				console.log(response);
-//				let promise =  response.json();
-//				promise.then(list=>{
-//				console.log(list);
-//				});
-				
-//			});
+//				if(!response.ok){
+//					throw new Error(response);
+//				}
 			
-//			let promise = fetch("/menus");
-//			
-//			promise.then(respomnse=>{
-//				console.log("도착했니");					
- //then: callback을 다로 담는다고 생각하면된다.
+			/*
+			promise
+			.then((response)=>{
+				let promise = response.json();
+				promise.then(list=>{
+					console.log(list);
+				});
+			});
+			*/
+			
+//			let response = await fetch("/menus");
+//			let list = response.json();
+//			console.log(list);
 
-				
-//			})
-	}
-})
-.mount(
-	"#main-section"
-);
+		},
+		menuAddHandler(){
+			this.isShowRegForm = !this.isShowRegForm;
+			console.log("메뉴추가");
+		},
+		menuRemoveHandler(){
+			this.isShowMenu = ! this.isShowMenu;
+		}
+	},
+	beforeCreate(){console.log("beforeCreate")},
+	created(){console.log("created")},
+	beforeMount(){console.log("beforeMount")},
+	mounted(){
+		this.load();
+		console.log("mounted")},
+	beforeUpdate(){console.log("beforeUpdate")},
+	updated(){console.log("updated")},
+	beforeUnmount(){console.log("beforeUnmount")},
+	unmounted(){console.log("unmounted")}
+})	
+.mount("#main-section");

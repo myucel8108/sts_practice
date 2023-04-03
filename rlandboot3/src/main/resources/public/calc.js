@@ -1,4 +1,7 @@
-window.addEventListener("load", function () {
+/**
+ * 
+ */
+ window.addEventListener("load", function () {
     const inputs = document.querySelectorAll("input");
     const xInput = inputs[0];
     const yInput = inputs[1];

@@ -9,25 +9,22 @@ import kr.co.rland.web.entity.Category;
 import kr.co.rland.web.repository.CategoryRepository;
 
 @Service
-public class DefaultCategoryService implements CatagoryService{
-
+public class DefaultCategoryService implements CategoryService {
+	
 	@Autowired
 	private CategoryRepository repository;
 	
 	@Override
-	public List<Category> getList() {
-		// TODO Auto-generated method stub
-		int category = 0;
+	public List<Category> getList() {		
 		return repository.findAll();
 	}
 
 	@Override
 	public String getNameById(Integer id) {
-		// TODO Auto-generated method stub
+		
 		return repository.findById(id).getName();
 	}
 
-
-
+	
 
 }

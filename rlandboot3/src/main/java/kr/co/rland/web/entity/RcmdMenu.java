@@ -14,6 +14,4 @@ public class RcmdMenu {
 	private int id;
 	private int menuId;
 	
-	
-	
 }

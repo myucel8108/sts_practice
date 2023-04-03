@@ -9,18 +9,20 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 
 import kr.co.rland.web.entity.Category;
+
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @MybatisTest
 class CategoryRepositoryTest {
-
+	
 	@Autowired
-	private CategoryRepository repository;
-
-//	void testFindAll() {
-//		List<Category> list = repository.findAll();
-////		Category cate = list.get(0);
-////		System.out.println(cate.getName());
-//		System.out.println(list);
-//	}
+	private CategoryRepository repository;	
+	
+	@Test
+	void testFindAll() {
+		List<Category> list = repository.findAll();
+		
+		for(Category e : list)
+			System.out.println(e);
+	}
 
 }

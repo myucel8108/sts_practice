@@ -3,30 +3,23 @@ package kr.co.rland.web.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import kr.co.rland.web.dto.SampleLogin;
-import kr.co.rland.web.service.LoginService;
 
-@Controller //문서를 만들어주는 방식 문서명을 return해달라!
+@Controller
 @RequestMapping("/")
 public class HomeController {
-	
-	@Autowired
-	private LoginService loginservice;
-	
-	
+
 	@PostMapping("upload")
 	@ResponseBody
 	public String upload(MultipartFile[] imgs, HttpServletRequest request) throws IllegalStateException, IOException {
@@ -67,30 +60,16 @@ public class HomeController {
 	@RequestMapping("index")
 	public String index(Model model, HttpServletResponse response) throws UnsupportedEncodingException {
 
-//		String data = URLEncoder.encode("cookie래요~", "utf-8");
-//
-//		System.out.println(data);
-//
-//		Cookie cookie = new Cookie("my", data);
-//		response.addCookie(cookie);
-//
-//		model.addAttribute("data", data);
+		String data = URLEncoder.encode("cookie래요~", "utf-8");
+
+		System.out.println(data);
+
+		Cookie cookie = new Cookie("my", data);
+		response.addCookie(cookie);
+
+		model.addAttribute("data", data);
 
 		return "index";
 	}
 
-	@GetMapping("login")
-	public String GETlogin(Model model, HttpServletRequest request) {
-
-		return "login";
-	}
-	@PostMapping("login")
-	public String POSTlogin(
-			@RequestParam("id") String id,
-			@RequestParam("pwd") String pwd) {
-			
-		SampleLogin inputLogin = new SampleLogin(id, pwd);
-		loginservice.Login(inputLogin);
-		return "login";
-	}
 }
