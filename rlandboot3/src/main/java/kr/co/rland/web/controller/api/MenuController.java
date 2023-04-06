@@ -3,6 +3,7 @@ package kr.co.rland.web.controller.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,13 +20,13 @@ import kr.co.rland.web.service.MenuService;
 
 
 @RestController("apiMenuController")   //이름을 명시해주면 충돌이 발생하지 않는다.
+//@CrossOrigin(origins = "http://localhost:5173") //클라이언트주소를 넣어야함
 @RequestMapping("menus")
 public class MenuController {
    
    
    @Autowired
    private MenuService service;
-
    @GetMapping
    public List<MenuView> getList(
          @RequestParam(name = "p", defaultValue = "1") int page,
