@@ -1,6 +1,8 @@
 package kr.co.rland.web.controller.api;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.co.rland.web.dto.MenuListData;
 import kr.co.rland.web.entity.Menu;
 import kr.co.rland.web.entity.MenuView;
 import kr.co.rland.web.service.MenuService;
@@ -28,15 +31,23 @@ public class MenuController {
    @Autowired
    private MenuService service;
    @GetMapping
-   public List<MenuView> getList(
+   public Map<String, Object> getList(
          @RequestParam(name = "p", defaultValue = "1") int page,
          @RequestParam(name ="c" , required = false )  Integer categoryId,  //required를 사용하면 필수값으로 할지 안할지 알려줄수있다.
          @RequestParam(name ="q" , required = false )  String query){  
       //원래는 문서 url이 와야하는데..? restcontroller에게 요청하면 데이터를 받는다! url를 받는것이 아니다. 
                             //객체는 json형식으로 바꿔서 보내준다.
+	   
+	 
       List<MenuView> list = service.getViewList(page, categoryId, query);
-          
-      return list;
+      List<MenuView> NewMenulist = service.getViewList(2, categoryId, query);
+//      MenuListData data = new MenuListData();
+//      data.setList(list);
+//      data.setList(NewMenulist);
+      Map<String, Object> data = new HashMap<>();
+      data.put("list", list);
+      data.put("NewMenulist", NewMenulist);
+      return data;
       //전에는 /menu/list라고url처럼 줬는데 지금은 왜 저런방식으로 주나?-> 데이터를 달라는 거기 때문에 
       //menu/list->이러한 페이지를 줘
       //restController는 ->data /menus->메뉴 목록을 받음
