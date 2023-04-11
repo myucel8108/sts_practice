@@ -72,4 +72,5 @@ public class MenuController {
 		//포워딩
 		return "menu/detail2";
 	}
+	
 }

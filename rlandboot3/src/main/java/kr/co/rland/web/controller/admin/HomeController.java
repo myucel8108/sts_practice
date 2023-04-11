@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpSession;
 import kr.co.rland.web.entity.MenuView;
 import kr.co.rland.web.service.MenuService;
 
@@ -25,7 +26,13 @@ import kr.co.rland.web.service.MenuService;
 public class HomeController {
 	
 	@GetMapping("index")
-	public String index() {
+	public String index(HttpSession session) {
+		System.out.println("여기왔나");
+		if(session.getAttribute("username")== null) {
+			System.out.println("여긴 안오나?");
+			return "redirect:/user/login?returnURL=/admin/index";
+		}		
+
 		return "admin/index";
 	}
 	
