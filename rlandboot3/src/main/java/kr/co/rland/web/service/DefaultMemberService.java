@@ -19,7 +19,7 @@ public class DefaultMemberService implements MemberService {
       if(member ==null)
     	  return false;
       
-      else if(!member.getPwd().equals(pwd))
+      else if(!member.getPwd().equals(pwd)) //안되는 이유 확인
     	  return false;
       
       return true;
