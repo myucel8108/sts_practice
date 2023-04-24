@@ -24,7 +24,6 @@ import kr.co.rland.web.service.RcmdMenuService;
 @Controller
 // 반복되는 상위 주소들은 이렇게 맵핑 주소 적어서 축약시킬 수 있다.
 @RequestMapping("/menu")
-
 public class MenuController {
 	
 	@Autowired

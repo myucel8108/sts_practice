@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:th="http://www.thymeleaf.org"
+>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +13,7 @@
 </head>
 <body>
     <header class="header-menubar">
-        <h1 class="d-none">알랜드</h1>
+        <h1 class="d-none"><span src:authentication="principal.email"></span>알랜드</h1>
         <div>
             <div>
                 <a href="" class="arrow-btn">뒤로가기</a>

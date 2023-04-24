@@ -28,10 +28,10 @@ public class HomeController {
 	@GetMapping("index")
 	public String index(HttpSession session) {
 		System.out.println("여기왔나");
-		if(session.getAttribute("username")== null) {
-			System.out.println("여긴 안오나?");
-			return "redirect:/user/login?returnURL=/admin/index";
-		}		
+//		if(session.getAttribute("username")== null) {
+//			System.out.println("여긴 안오나?");
+//			return "redirect:/user/login?returnURL=/admin/index";
+//		}		
 
 		return "admin/index";
 	}

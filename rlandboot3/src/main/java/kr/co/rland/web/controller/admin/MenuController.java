@@ -2,15 +2,22 @@ package kr.co.rland.web.controller.admin;
 
 
 import java.io.UnsupportedEncodingException;
+import java.security.Principal;
+import java.security.Security;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.co.rland.web.config.RlandUserDetails;
 import kr.co.rland.web.entity.Menu;
 import kr.co.rland.web.entity.MenuView;
 import kr.co.rland.web.service.MenuService;
@@ -59,12 +66,32 @@ public class MenuController {
 //		return "/WEB-INF/view/admin/menu/reg.jsp";
 //	}
 //	
-//	// 폼입력해서 제출이요
-////	@RequestMapping("reg")
-//	@PostMapping("reg")
-//	public String reg(String title) {
-//		// 등록하고
-//		System.out.println("메뉴 등록 완료");
-//		return "redirect:list";
-//	}
+	// 폼입력해서 제출이요
+//	@RequestMapping("reg")
+	@PostMapping("reg")
+	public String reg(String title,
+			Authentication authentication,
+			Principal principal
+			) {
+	
+		RlandUserDetails user = (RlandUserDetails) authentication.getPrincipal();
+		System.out.println(user.getEmail());
+		//4번째방식
+		//UserDetails user = (UserDetails) authentication.getPrincipal();
+		
+	//3번째방식
+		//System.out.println(principal.getName());
+		
+		//2번쨰 방식
+//		String username = authentication.getName();
+//		System.out.println(username);
+		
+		//1번쨰 방식
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//		String currentPrincioalNmae = authentication.getName();
+//		System.out.println(currentPrincioalNmae);
+		// 등록하고r
+		System.out.println("메뉴 등록 완료");
+		return "redirect:list";
+	}
 }
